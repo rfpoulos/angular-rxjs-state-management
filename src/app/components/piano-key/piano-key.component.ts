@@ -9,6 +9,7 @@ import { NotesService } from 'src/app/services/notes/notes-service';
 export class PianoKeyComponent implements OnInit {
   @Input() note: string;
 
+  private isPressed: boolean = false; 
   constructor(
     private notesService: NotesService,
   ) { }
@@ -18,5 +19,13 @@ export class PianoKeyComponent implements OnInit {
 
   public playNote() {
     this.notesService.playNote(this.note);
+  }
+
+  public setClasses() {
+    const classes = {
+      note: true,
+      pressed: this.isPressed
+    }
+    return classes;
   }
 }
