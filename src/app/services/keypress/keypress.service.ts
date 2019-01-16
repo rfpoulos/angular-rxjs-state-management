@@ -9,17 +9,18 @@ export class KeypressService {
   private keyDown$: Observable<Event>;
   private keyUp$: Observable<Event>;
 
-  constructor() { 
+  constructor(
+    private storeService: StoreService
+  ) { 
     this.keyDown$ = fromEvent(document, "keydown");
     this.keyDown$.subscribe((e) => {
-      console.log(e.key);
+      this.storeService.set(["keys", e.key], true);
     });
 
     this.keyUp$ = fromEvent(document, "keyup");
     this.keyUp$.subscribe((e) => {
-      console.log(e.key);
+      this.storeService.set(["keys", e.key], false);
     });
   }
-
 
 }

@@ -11,6 +11,7 @@ export class StoreService {
   private data$: BehaviorSubject<any>;
   private data;
   constructor() {
+    window.store = this.getStore;
     this.data = {};
     this.data$ = new BehaviorSubject(this.data);
   }
@@ -26,5 +27,9 @@ export class StoreService {
     const newData = set(path, value, this.data);
     this.data = newData;
     this.data$.next(newData);
+  }
+
+  getStore = () => {
+    return this.data;
   }
 }
